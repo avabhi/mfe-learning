@@ -9,18 +9,36 @@ export default () => {
   const onParentNavigateRef = useRef(null);
 
   // Mount the microfrontend once
+  // Mount the microfrontend once
   useEffect(() => {
-    const { onParentNavigate } = mount(ref.current, {
-      initialPath: location.pathname,
-      onNavigate: ({ pathname: nextPathname }) => {
-        navigate(nextPathname);
-      },
-    });
-    if (!onParentNavigate) {
-      console.log("no parent navigation found");
+    if (!ref.current) {
+      console.warn("Ref element not available for mounting");
+      return;
     }
 
-    onParentNavigateRef.current = onParentNavigate;
+    try {
+      const result = mount(ref.current, {
+        initialPath: location.pathname,
+        onNavigate: ({ pathname: nextPathname }) => {
+          navigate(nextPathname);
+        },
+      });
+
+      const { onParentNavigate } = result || {};
+
+      if (!onParentNavigate) {
+        console.log("no parent navigation found");
+      }
+
+      onParentNavigateRef.current = onParentNavigate;
+
+      // Cleanup function
+      return () => {
+        onParentNavigateRef.current = null;
+      };
+    } catch (error) {
+      console.error("Failed to mount microfrontend:", error);
+    }
   }, []); // Empty dependency - mount once
 
   // Sync navigation from container to child
