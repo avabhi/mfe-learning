@@ -22,7 +22,7 @@ const mount = (el, { onNavigate, defaultHistory }) => {
 };
 
 if (process.env.NODE_ENV === "development") {
-  const el = document.querySelector("#_marketing-dev-root");
+  const el = document.querySelector("#_auth-dev-root");
   if (el) {
     mount(el, { defaultHistory: createBrowserHistory });
   }
