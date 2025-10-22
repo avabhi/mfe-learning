@@ -1,6 +1,6 @@
-import { mount } from 'auth/AuthApp';
-import React, { useRef, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { mount } from "auth/AuthApp";
+import React, { useRef, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default ({ onSignIn }) => {
   const ref = useRef(null);
@@ -17,6 +17,9 @@ export default ({ onSignIn }) => {
       },
       onSignIn,
     });
+    if (!onParentNavigate) {
+      console.log("no parent navigation found on auth");
+    }
 
     onParentNavigateRef.current = onParentNavigate;
   }, []); // Empty dependency - mount once
