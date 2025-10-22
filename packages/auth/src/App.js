@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Switch, Route, Router } from "react-router-dom";
 import {
   StylesProvider,
@@ -13,17 +12,17 @@ const generateClassName = createGenerateClassName({
   productionPrefix: "au",
 });
 
-export default ({ history, onSignin }) => {
+export default ({ history, onSignIn }) => {
   return (
     <div>
       <StylesProvider generateClassName={generateClassName}>
         <Router history={history}>
           <Switch>
-            <Route path="/auth/signup">
-              <Signup onSignIn={onSignin} />
-            </Route>
             <Route path="/auth/signin">
-              <Signin onSignIn={onSignin} />
+              <Signin onSignIn={onSignIn} />
+            </Route>
+            <Route path="/auth/signup">
+              <Signup onSignIn={onSignIn} />
             </Route>
           </Switch>
         </Router>

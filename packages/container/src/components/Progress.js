@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => {
 
 export default () => {
   const classes = useStyles();
+
   return (
     <div className={classes.bar}>
       <LinearProgress />
